@@ -60,6 +60,7 @@ If you want to modify the configuration, place it in the root of your dashboard 
 | enable             | boolean | `true`  | Enable or disable the swipe navigation.                                                                                                                                      |
 | enable_mouse_swipe | boolean | `false` | Enable or disable the swipe navigation via mouse.                                                                                                                            |
 | enable_on_subviews | boolean | `true`  | Enables swipe navigation while on subviews. <br>⚠️ _Note the difference between this and `skip_subviews`, which skips over subviews while navigating **from** regular views._ |
+| exceptions         | list    |         | A list of CSS selectors that are excluded from swipe navigation. Any swipe that starts on a matching element (or a descendant) is ignored, so the element can scroll natively. Useful for custom cards with their own horizontal scrolling. e.g., `["frigate-events-card", ".my-slider"]`. |
 | logger_level       | string  | `warn`  | Set logging level. Possible values are: `verbose`, `debug`, `info`, `warn`, `error`.                                                                                         |
 | prevent_default    | boolean | `false` | Prevent the browsers default horizontal swipe actions.                                                                                                                       |
 | skip_subviews      | boolean | `true`  | Automatically skip subviews.                                                                                                                                                 |
@@ -83,6 +84,9 @@ swipe_nav:
   skip_tabs: 5,6,7,8
   prevent_default: true
   swipe_amount: 30
+  exceptions:
+    - frigate-events-card
+    - .my-slider
   
 views:
 ```
