@@ -129,11 +129,19 @@ class SwipeManager {
 
     const path = event.composedPath();
     if (typeof path == "object") {
+      const userExceptions = ConfigManager.getCurrentConfig().getExceptions();
       for (const element of path) {
         if (!(element instanceof Element)) continue;
         if (element.nodeName == "HUI-VIEW") {
           // hui-view is the root element of the Home Assistant dashboard, so we can stop here.
           break;
+        }
+
+        // User-configured exceptions (from the swipe_nav config). These are
+        // treated as plain, unconditional selectors like the hard-coded ones.
+        if (userExceptions.length > 0 && element.matches(userExceptions.join(", "))) {
+          Logger.logd(LOG_TAG, `Ignoring ${interactionType} on user exception "${element.nodeName.toLowerCase()}".`);
+          return; // Ignore swipe (user exception)
         }
 
         // Fast early-out: if the element doesn't match any exception selector,

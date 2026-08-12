@@ -52,6 +52,13 @@
       show_in_sidebar: true
       filename: ./dashboards/enable-false.yaml
 
+    exceptions:
+      mode: yaml
+      title: Exceptions
+      icon: mdi:ban
+      show_in_sidebar: true
+      filename: ./dashboards/exceptions.yaml
+
     invisible-boolean:
       mode: yaml
       title: Invisible boolean

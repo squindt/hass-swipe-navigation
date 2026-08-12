@@ -15,6 +15,7 @@ class Config {
   private skip_hidden = true;
   private skip_subviews = true;
   private skip_tabs: readonly number[] = [];
+  private exceptions: readonly string[] = [];
   private swipe_amount = 0.15;
   private wrap = true;
 
@@ -56,6 +57,10 @@ class Config {
 
   public getSkipTabs(): readonly number[] {
     return this.skip_tabs;
+  }
+
+  public getExceptions(): readonly string[] {
+    return this.exceptions;
   }
 
   public getSwipeAmount(): number {
@@ -122,6 +127,9 @@ class Config {
           .split(",")
           .map((item) => { return parseInt(item); });
     }
+    if (rawConfig.exceptions != undefined) {
+      newConfig.exceptions = [...rawConfig.exceptions];
+    }
     if (rawConfig.swipe_amount != null) { newConfig.swipe_amount = rawConfig.swipe_amount / 100.0; }
     if (rawConfig.wrap != null) { newConfig.wrap = rawConfig.wrap; }
 
@@ -154,6 +162,7 @@ const SwipeNavigationConfigSchema = z.object({
   skip_hidden: z.boolean().optional(),
   skip_subviews: z.boolean().optional(),
   skip_tabs: z.coerce.string().optional(),
+  exceptions: z.array(z.string()).optional(),
   swipe_amount: z.number().optional(),
   wrap: z.boolean().optional()
 });

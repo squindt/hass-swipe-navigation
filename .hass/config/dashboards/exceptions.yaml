@@ -1,0 +1,24 @@
+swipe_nav:
+  logger_level: verbose
+  exceptions:
+    - hui-entities-card
+
+views:
+
+  - title: Exceptions
+    cards:
+      - type: entities
+        title: Exception Card
+        entities:
+          - entity: light.main_light
+          - entity: sun.sun
+
+      - type: markdown
+        title: View 1
+        content: Content...
+
+  - title: View 2
+    cards:
+      - type: markdown
+        title: View 2
+        content: Content...
